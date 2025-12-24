@@ -97,7 +97,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency> // H2 Database for testing
+		<!-- H2 Database for testing -->
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
