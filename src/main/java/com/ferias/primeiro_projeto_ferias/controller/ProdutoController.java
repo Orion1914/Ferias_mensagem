@@ -11,12 +11,11 @@ import com.ferias.primeiro_projeto_ferias.model.Produto;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.ferias.primeiro_projeto_ferias.exceptions.RecursoNaoEncontradoExceptions; 
 
 
 
