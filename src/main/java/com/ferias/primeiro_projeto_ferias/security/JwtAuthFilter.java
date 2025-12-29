@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import io.jsonwebtoken.JwtException;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -29,11 +30,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
       return;
     }
     String token = authHeader.substring(7);
-    String username = JwtUtil.extractUsername(token);
+    String username;
+    try {
+      username = JwtUtil.extractUsername(token);
+    } catch (JwtException e) {
+      filterChain.doFilter(request, response);
+      return;
+    }
 
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = (UserDetails) userDetailsService.loadUserByUsername(username);
-      if (JwtUtil.validateToken(token)) {
+      if (JwtUtil.validateToken(token, userDetails)) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null,
             userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authToken);
