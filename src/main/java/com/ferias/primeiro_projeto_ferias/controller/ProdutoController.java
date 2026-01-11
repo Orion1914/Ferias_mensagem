@@ -15,6 +15,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -54,4 +56,10 @@ public class ProdutoController {
     produtoService.deletarProduto(id);
     return ResponseEntity.noContent().build();
   }
+
+  @PutMapping("/{id}")
+  public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) {
+      return produtoService.atualizarProduto(id, produto);
+  }
+  
 }

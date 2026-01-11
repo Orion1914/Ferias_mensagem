@@ -38,4 +38,11 @@ public class ProdutoService {
     produtoRepository.deleteById(id);
   }
 
+  public Produto atualizarProduto(Long id, Produto produto) {
+    Produto produtoExistente = buscarPorId(id);
+    produtoExistente.setNome(produto.getNome());
+    produtoExistente.setPreco(produto.getPreco());
+    return produtoRepository.save(produtoExistente);
+  }
+
 }
